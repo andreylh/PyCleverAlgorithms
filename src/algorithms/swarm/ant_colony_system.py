@@ -73,11 +73,12 @@ def stepwise_const(cities, phero, c_heur, c_greed):
     import random
     perm = []
     perm.append(random.randint(0, len(cities)-1))
-    if len(perm) != len(cities):
+    while True:
         choices = calculate_choices(cities, perm[-1], perm, phero, c_heur, 1.0)
         greedy = random.random() < c_greed
         next_city = iif(greedy, greedy_select(choices), prob_select(choices))
         perm.append(next_city)
+        if len(perm) == len(cities): break
     return perm
 
 
